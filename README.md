@@ -186,16 +186,12 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 
 	Code Example:
 
-		public void onBack(View view) {  
-			try{  
-				// this exception is explicitly thrown just for example  
-				throw new NullPointerException();  
-			} catch (NullPointerException e){  
-				UserExperior._sendException_(e, "NullPointerException at MainActivity onBack");  
-				e.printStackTrace();  
-			}  
-			onBackPressed();  
-		}
+		try {  
+			// These are hardcoded lat, long, you can pass actual lat, long if your app uses gps  
+			UserExperior.setDeviceLocation(19.154023, 72.945204);  
+		} catch (Exception e) {  
+			e.printStackTrace();  
+		}		
 
 8. **Send Handled Exceptions**
 
@@ -206,11 +202,15 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 	
 	Code Example:
 	
-		try {  
-			// These are hardcoded lat, long, you can pass actual lat, long if your app uses gps  
-			UserExperior.setDeviceLocation(19.154023, 72.945204);  
-		} catch (Exception e) {  
-			e.printStackTrace();  
+		public void onBack(View view) {  
+			try{  
+				// this exception is explicitly thrown just for example  
+				throw new NullPointerException();  
+			} catch (NullPointerException e){  
+				UserExperior.sendException(e, "NullPointerException at MainActivity onBack");  
+				e.printStackTrace();  
+			}  
+			onBackPressed();  
 		}
 
 9. **Sleep Mode**
